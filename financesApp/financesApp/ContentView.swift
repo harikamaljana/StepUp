@@ -13,6 +13,8 @@ struct ContentView: View {
     @State var showGoal = false
     @State var showingSheet = false
     @State var showStocks = false
+    @State var showLoans = false
+    @State var showSomething = false
     
     var body: some View {
         
@@ -27,7 +29,7 @@ struct ContentView: View {
                             
                             RoundedRectangle(cornerRadius: 15)
                                 .fill(LinearGradient(gradient: Gradient(colors: [Color(red: 62/255, green: 180/255, blue: 249/255), Color(red: 62/255, green: 226/255, blue: 126/255)]), startPoint: .leading, endPoint: .topTrailing))
-                                .frame(width: 400, height: 150)
+                                .frame(width: 350, height: 150)
                                 .padding()
                             
                             HStack {
@@ -63,7 +65,7 @@ struct ContentView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 15)
                                 .fill(LinearGradient(gradient: Gradient(colors: [Color(red: 62/255, green: 226/255, blue: 126/255), Color(red: 240/255, green: 213/255, blue:13/255)]), startPoint: .bottomLeading, endPoint: .topTrailing))
-                                .frame(width: 400, height: 150)
+                                .frame(width: 350, height: 150)
                                 .padding()
                             
                             HStack {
@@ -93,7 +95,7 @@ struct ContentView: View {
                     }
                     
                 }
-            }
+            }.padding(.horizontal, 25)
             
             VStack {
                 Button {
@@ -112,7 +114,7 @@ struct ContentView: View {
                         ZStack {
                             
                             RoundedRectangle(cornerRadius: 15)
-                                .frame(width: 350, height: 30)
+                                .frame(width: 315, height: 30)
                                 .shadow(radius: 10)
                                 .opacity(0.1)
                             
@@ -126,6 +128,7 @@ struct ContentView: View {
                         }
                     }
                     .foregroundColor(.black)
+                    .padding(.horizontal)
                 }
                 
                 Button {
@@ -143,7 +146,7 @@ struct ContentView: View {
                         ZStack {
                             
                             RoundedRectangle(cornerRadius: 15)
-                                .frame(width: 350, height: 30)
+                                .frame(width: 315, height: 30)
                                 .opacity(0.1)
                             
                             HStack {
@@ -157,6 +160,7 @@ struct ContentView: View {
                         
                     }
                     .foregroundColor(.black)
+                    .padding(.horizontal)
                 }
                 
                 Button {
@@ -173,7 +177,7 @@ struct ContentView: View {
                         ZStack {
                             
                             RoundedRectangle(cornerRadius: 15)
-                                .frame(width: 350, height: 30)
+                                .frame(width: 315, height: 30)
                                 .opacity(0.1)
                             
                             HStack {
@@ -185,6 +189,7 @@ struct ContentView: View {
                         }
                     }
                     .foregroundColor(.black)
+                    .padding(.horizontal)
                 }
                 
                 if (showGoal) {
@@ -203,7 +208,7 @@ struct ContentView: View {
                             ZStack {
                                 
                                 RoundedRectangle(cornerRadius: 15)
-                                    .frame(width: 350, height: 30)
+                                    .frame(width: 315, height: 30)
                                     .opacity(0.1)
                                 
                                 
@@ -211,6 +216,7 @@ struct ContentView: View {
                             
                         }
                         .foregroundColor(.black)
+                        .padding(.horizontal)
                     }
                 }
                 
@@ -244,45 +250,38 @@ struct ContentView: View {
                     
                 }
                     
-                Spacer()
+                //Spacer()
                 
                 Button {
-                    
+                    showSomething.toggle()
                 } label: {
                     
-                    let chartStyle = ChartStyle(backgroundColor: Color.white, accentColor: Color(red: 100/255, green: 209/255, blue: 126/255), secondGradientColor: Color(red: 62/255, green: 180/255, blue: 249/255), textColor: Color.black, legendTextColor: Color.white, dropShadowColor: .gray )
-                    
-                    PieChartView(data: [8,23,54,32], title: "Splits", style: chartStyle)
+                
+                    MultiLineChartView(data: [([8,32,11,23,40,28], GradientColors.green), ([90,99,78,111,70,60,77], GradientColors.purple), ([34,56,72,38,43,100,50], GradientColors.orngPink)], title: "FI/RE")
+                        .foregroundColor(.black)
+
                 }
             }
-            .padding()
+            //.padding()
             
             HStack {
                 Button {
-                    
+                    showStocks.toggle()
                 } label: {
                     
                     let chartStyle = ChartStyle(backgroundColor: Color.white, accentColor: Color(red: 93/255, green: 49/255, blue: 235/255), secondGradientColor: Color(red: 62/255, green: 180/255, blue: 249/255), textColor: Color.black, legendTextColor: Color.gray, dropShadowColor: .gray )
                     
                     BarChartView(data: ChartData(points: [8,2]), title: "Money In/Out", legend: "+ $55.21", style: chartStyle, cornerImage:Image(systemName: ""))
                         
-                        //BarChartView(data: [8,23,54,32,12,37,7,23,43], title: "Title", style: Styles.barChartMidnightGreen)
-                    //BarChartView(data: ChartData(points: [63150, 50900]), title: "Money In/Out", style: chartStyle)
                 }
                 
-                Spacer()
-                
                 Button {
-                    
+                    showLoans.toggle()
                 } label: {
                     
-                    // Color(red: 62/255, green: 226/255, blue: 126/255), Color(red: 240/255, green: 213/255, blue:13/255)
+                    let chartStyle = ChartStyle(backgroundColor: Color.white, accentColor: Color(red: 100/255, green: 209/255, blue: 126/255), secondGradientColor: Color(red: 62/255, green: 180/255, blue: 249/255), textColor: Color.black, legendTextColor: Color.white, dropShadowColor: .gray )
                     
-                    let chartStyle = ChartStyle(backgroundColor: Color.white, accentColor: Color(red: 57/255, green: 214/255, blue: 84/255), secondGradientColor: Color(red: 61/255, green: 255/255, blue: 129/255), textColor: Color.black, legendTextColor: Color.gray, dropShadowColor: .gray )
-                    
-                    //[8,23,54,32,12,37,7,23,43]
-                    
-                    BarChartView(data: ChartData(points: [8,23,54,32,12,37,7,23,43]), title: "Loans", legend: "Recent Payment: $215.98", style: chartStyle, cornerImage:Image(systemName: ""))
+                    PieChartView(data: [8,23,54,32], title: "Splits", style: chartStyle)
                 }
                 
             }
@@ -295,6 +294,62 @@ struct ContentView: View {
         .sheet(isPresented: $showStocks) {
             StocksView()
                 }
+        .sheet(isPresented: $showLoans) {
+            SplitsView()
+                }
+        .sheet(isPresented: $showSomething) {
+            LoansView()
+        }
+    }
+}
+
+struct SplitsView: View {
+    var body: some View {
+        Image("image")
+            .resizable()
+            .scaledToFit()
+            .padding()
+    }
+}
+
+struct LoansView: View {
+    var body: some View {
+        VStack {
+            //TextField("debt", text: $debt, format: .number)
+                    //.keyboardType(.numberPad)
+            MultiLineChartView(data: [ ([120, 500, 397, 556, 731, 924, 200, 250, 300, 600, 400], GradientColors.green), ([10000, 9760, 9520, 9280, 9040, 8800, 8560, 8320, 8080, 7840, 7600, 7360], GradientColors.orngPink)], title: "FI/RE", form: ChartForm.extraLarge)
+                .padding()
+            
+            HStack {
+                Circle()
+                    .frame(width: 15, height: 30)
+                    .foregroundColor(.green)
+                
+                    .padding(.horizontal)
+                Text("Investment: $400")
+                Spacer()
+            }
+            HStack {
+                Circle()
+                    .frame(width: 15, height: 30)
+                    .foregroundColor(.red)
+                    .padding(.horizontal)
+                Text("Debt: $7,360")
+                Spacer()
+            }
+            
+            Spacer()
+            Text("Remaining Payments: 16")
+                .font(.title)
+                .bold()
+            Text("Years Until FI/RE:")
+                .font(.title)
+                .bold()
+                .padding()
+            Text("3 Years")
+                .font(.title)
+                .bold()
+        }
     }
 }
 
@@ -347,7 +402,7 @@ struct SheetView: View {
                         
                         
                         RoundedRectangle(cornerRadius: 15)
-                            .frame(width: 400, height: 40)
+                            .frame(width: 375, height: 40)
                             .opacity(0.1)
                         
                         HStack {
@@ -616,7 +671,7 @@ struct SheetView: View {
                         
                         
                         RoundedRectangle(cornerRadius: 15)
-                            .frame(width: 400, height: 40)
+                            .frame(width: 375, height: 40)
                             .opacity(0.1)
                         
                         HStack {
@@ -708,7 +763,7 @@ struct SheetView: View {
                                 }
                             }
                         }
-                        .padding(.bottom, 300)
+                        .padding(.bottom, 215)
                         .padding(.horizontal)
                     }
                     
@@ -733,5 +788,6 @@ struct SheetView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        //LoansView()
     }
 }
